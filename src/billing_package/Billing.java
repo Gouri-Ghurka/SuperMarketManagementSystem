@@ -380,34 +380,4 @@ public class Billing
 		cobj.setTot_points(0);//new customer points are always zero
 		cll.insertLast(cobj);	  
 	}
-
-
-	public static void main(String[] args)
-	{
-		Scanner sc=new Scanner(System.in);
-		
-		
-		  ProductImplementation product=new ProductImplementation();
-		  product.retrieveFromDataBase(); 
-		 
-		
-		
-		
-			/*
-			 * Billing bobj1=new Billing(); bobj1.retrive(); bobj1.billGeneration(product);
-			 * bobj1.loadIntoDatabase();
-			 */
-		  product.displayList();
-		  product.addProduct(sc);
-		  product.displayList();
-		  product.addProduct(sc);
-		  product.displayList();
-		 product.addToDataBase();
-		 
-		
-		/*
-		 * Billing bobj2=new Billing(); bobj2.retrive(); bobj2.billGeneration();
-		 * bobj2.loadIntoDatabase();
-		 */
-	}
 }
