@@ -28,7 +28,7 @@ public class Employeeimplementation {
 			if(emp.getE_contact_no().equals(etemp.getE_contact_no()))
 			{
 				flag = 1;
-				System.out.println(flag);
+				//System.out.println(flag);
 
 			}
 			if(flag==1)
@@ -208,7 +208,7 @@ public class Employeeimplementation {
 		}
 		catch(Exception e)
 		{
-			System.out.println("Exception is being thrown from retrieve database");
+			//System.out.println("Exception is being thrown from retrieve database");
 			System.out.println(e);
 		}
 	}
