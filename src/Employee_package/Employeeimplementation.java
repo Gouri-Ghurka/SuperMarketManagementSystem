@@ -24,6 +24,7 @@ public class Employeeimplementation {
 		//e_id=sc.nextInt();
 		boolean bool=true;
 		System.out.println("Enter Employee Name");
+		sc.nextLine();
 		do {
 			bool=false;
 			String name=sc.nextLine();
