@@ -1,9 +1,10 @@
 package product_package;
 import linkedlist_package.*;
+
 import java.util.Scanner;
 
 import java.sql.*;
-
+//make accept details private
 public class ProductImplementation
 {
 	public LinkedList ll = new LinkedList();
@@ -14,13 +15,14 @@ public class ProductImplementation
 		this.acceptNameBrandQuantity(sc,p);
 		this.checkIfAlreadyPesent(p,sc);
 	}
-	
+
 	//accept these details to check if the product is existing or not
-	public void acceptNameBrandQuantity(Scanner sc,Product p)
+	private void acceptNameBrandQuantity(Scanner sc,Product p)
 	{
 		Boolean bool = true;
 		String str = "";
 		System.out.println("Enter the Product name");
+		sc.nextLine();
 		do
 		{
 			str = sc.nextLine();
@@ -33,10 +35,10 @@ public class ProductImplementation
 			{
 				bool = true;
 			}
-			
+
 		}while(!bool);
 		p.setProductName(str);
-		
+
 		System.out.println("Enter the Product brand");
 		str = "";
 		do
@@ -51,10 +53,10 @@ public class ProductImplementation
 			{
 				bool = true;
 			}
-			
+
 		}while(!bool);
 		p.setProductBrand(str);
-		
+
 		System.out.println("Enter the Product Quantity");
 		do
 		{
@@ -68,80 +70,77 @@ public class ProductImplementation
 				String s =  sc.next();
 				System.out.println("Please enter a valid Quantity");
 			}
-			
+
 		}while(!bool);
 	}
-	
+
 	//accept these details only if the product does not exist
-	public void acceptCategoryCpMrp(Scanner sc,Product p)
-	 {		
-			Boolean bool = true;
-			String str = "";
-			System.out.println("Enter the Product category");
-			if(sc.hasNext())
+	private void acceptCategoryCpMrp(Scanner sc,Product p)
+	{
+		Boolean bool = true;
+		String str = "";
+		System.out.println("Enter the Product category");
+		sc.nextLine();
+		do
+		{
+			str = sc.nextLine();
+			if(str.isBlank())
 			{
-				str = sc.nextLine();
+				System.out.println("Please enter a valid product category");
+				bool = false;
 			}
-			do
+			else
 			{
-				str = sc.nextLine();
-				if(str.isBlank())
-				{
-					System.out.println("Please enter a valid product category");
-					bool = false;
-				}
-				else
-				{
-					bool = true;
-				}
-				
-			}while(!bool);
-			p.setProductCategory(str);
-			
-			System.out.println("Enter the Product Cost Price");
-			do
+				bool = true;
+			}
+
+		}while(!bool);
+		p.setProductCategory(str);
+
+		System.out.println("Enter the Product Cost Price");
+		do
+		{
+			bool = sc.hasNextDouble();
+			if(bool)
 			{
-				bool = sc.hasNextDouble();
-				if(bool)
-				{
-					p.setProductCostPrice(sc.nextDouble());
-				}
-				else
-				{
-					String s = sc.next();
-					System.out.println("Please enter a valid cost price");
-				}
-				
-			}while(!bool);
-			
-			System.out.println("Enter the Product MRP");
-			do
+				p.setProductCostPrice(sc.nextDouble());
+			}
+			else
 			{
-				bool = sc.hasNextInt();
-				if(bool)
-				{
-					p.setProductMrp(sc.nextDouble());
-				}
-				else
-				{
-					String s =  sc.next();
-					System.out.println("Please enter a valid MRP");
-				}
-				
-			}while(!bool);
-		
-	 }
-	
+				String s = sc.next();
+				System.out.println("Please enter a valid cost price");
+			}
+
+		}while(!bool);
+
+		System.out.println("Enter the Product MRP");
+		do
+		{
+			bool = sc.hasNextInt();
+			if(bool)
+			{
+				p.setProductMrp(sc.nextDouble());
+			}
+			else
+			{
+				String s =  sc.next();
+				System.out.println("Please enter a valid MRP");
+			}
+
+		}while(!bool);
+
+	}
+
 	public void displayProductDetails(Product p)
-	 {
-		 System.out.println("Product ID = "+p.getProductID());
-		 System.out.println("Product Name = "+p.getProductName());
-		 System.out.println("Product Brand = "+p.getBrand());
-		 System.out.println("Product Category = "+p.getCategory());
-		 System.out.println("Product Cost Price = "+p.getCostPrice());
-		 System.out.println("Product MRP = "+p.getMrp());
-		 System.out.println("Product Quantity available = "+p.getProductQuantity());
-	 }
+	{
+		System.out.println("Product ID = "+p.getProductID());
+		System.out.println("Product Name = "+p.getProductName());
+		System.out.println("Product Brand = "+p.getBrand());
+		System.out.println("Product Category = "+p.getCategory());
+		System.out.println("Product Cost Price = "+p.getCostPrice());
+		System.out.println("Product MRP = "+p.getMrp());
+		System.out.println("Product Quantity available = "+p.getProductQuantity());
+	}
 
 	public void checkIfAlreadyPesent(Product p, Scanner sc)
 	{
@@ -301,7 +300,7 @@ public class ProductImplementation
 		try
 		{
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			con=DriverManager.getConnection("jdbc:mysql://localhost:3306/supermarket","root","root_loop");
+			con=DriverManager.getConnection("jdbc:mysql://localhost:3306/supermarket","root","root");
 			st=con.createStatement();
 			st.executeUpdate("delete from products");
 			if(ll.getHead()==null)
@@ -340,7 +339,7 @@ public class ProductImplementation
 		try
 		{
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			con=DriverManager.getConnection("jdbc:mysql://localhost:3306/supermarket","root","root_loop");
+			con=DriverManager.getConnection("jdbc:mysql://localhost:3306/supermarket","root","root");
 			st=con.createStatement();
 			rs=st.executeQuery("select * from products");
 			while(rs.next())//this loop executes till the table contents are exhausted. Doesn't stop at the end of a row
@@ -389,7 +388,7 @@ public class ProductImplementation
 		}
 	}
 
-	
+
 	public Node mergeSort()
 	{
 		LinkedList sorted = new LinkedList();
@@ -400,7 +399,7 @@ public class ProductImplementation
 			sorted.insertLast((Object)temp.getData());
 			temp = temp.getNext();
 		}
-		
+
 		if(sorted.getHead()==null)
 		{
 			System.out.println("Empty list. Cannot sort");
@@ -418,7 +417,7 @@ public class ProductImplementation
 		}
 		return sorted.getHead();
 	}
-	
+
 	private Node split(Node head)
 	{
 		Node mid = null;
@@ -426,7 +425,7 @@ public class ProductImplementation
 		Node result = null;
 		Node head1 = null;
 		Node head2 = null;
-		
+
 		if(head==null || head.getNext()==null)//there is no list left or there is a single element left.
 		{
 			result = head;
@@ -436,17 +435,17 @@ public class ProductImplementation
 			mid = calculateMid(head);
 			nextOfMid = mid.getNext();
 			mid.setNext(null);//indicates end of divided list(1st half)
-		
+
 			//head holds 1st node of 1st half
 			//nextOfMid holds 1st node of 2nd half
-			
+
 			head1 = split(head);
 			head2 = split(nextOfMid);
 			result = merge(head1,head2);
 		}
 		return result;
 	}
-	
+
 	private Node merge(Node head1,Node head2)
 	{
 		Node head = null;//will store the head of two merged lists
@@ -481,12 +480,12 @@ public class ProductImplementation
 		}
 		return head;
 	}
-	
+
 	private Node calculateMid(Node head)
 	{
 		//slow moves at half the speed of fast.
 		//till fast reaches the end of the list, slow points to the mid node
-		
+
 		Node slow = null;
 		Node fast = null;
 		if (head!=null) 
@@ -502,7 +501,7 @@ public class ProductImplementation
 		}
 		return slow;
 	}
-	
+
 	//just written if in case no of products in the market has to be known
 	public int calculateLengthOfLinkedList(LinkedList templl)
 	{
@@ -515,7 +514,7 @@ public class ProductImplementation
 		}
 		return len;
 	}
-	
+
 	public void updateCost(int id,int mrp,int cost)
 	{
 		Node nodeToBeUpdated = null;
@@ -523,7 +522,7 @@ public class ProductImplementation
 		((Product)nodeToBeUpdated.getData()).setProductMrp(mrp);
 		((Product)nodeToBeUpdated.getData()).setProductCostPrice(cost);;
 	}
-	
+
 	public void emptyLinkedList()
 	{
 		ll.setHead(null);
