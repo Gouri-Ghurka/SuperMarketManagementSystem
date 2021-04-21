@@ -376,7 +376,8 @@ public class Employeeimplementation {
 	public void higest_salary()
 	{
 		boolean result =false;
-		double maximum=0,maxi=0;
+		double maximum=0;
+		double maxi=0;
 		if(ll.getHead()==null) {
 			System.out.println("Empty list. Cannot search"); } 
 		else {
