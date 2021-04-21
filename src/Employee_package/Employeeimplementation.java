@@ -17,6 +17,139 @@ public class Employeeimplementation {
 		this.checkIfAlreadyPesent(emp);
 		//System.out.println("Executing");
 	}
+	private void acceptEmployeeDetails(Employee emp)
+	{
+		String temp;
+		//System.out.println("Enter Employee Id");
+		//e_id=sc.nextInt();
+		boolean bool=true;
+		System.out.println("Enter Employee Name");
+		do {
+			bool=false;
+			String name=sc.nextLine();
+			if(name.isBlank())
+				System.out.println("Please Enter Appropriate Employee Name");
+			else
+			{
+				emp.setE_name(name);
+			bool=true;
+				
+		}
+		}while(bool==false);
+		System.out.println("Enter Employee Contact Number");
+	    bool = true;
+	    do
+	    {
+			bool=false;
+			String contactNo=sc.nextLine();
+			if(contactNo.isBlank())
+			{
+				bool=false;
+			}
+			else//when alphabets are entered
+			{
+				bool=Pattern.matches("[6789]{1}[0-9]{9}",contactNo);
+				if(bool)
+				{
+					bool=true;
+					emp.setE_contact_no(contactNo);//contact number starts with 6,7,8,9 and have 10 digits
+				}
+				else
+				{
+					bool=false;
+				}
+			}
+				if(bool==false)
+				{
+					System.out.println("Please Enter Appropriate Contact Number!!!");
+				}
+
+		}while(bool==false);
+		//sc.nextLine();
+		System.out.println("Enter Employee Role");
+		do {
+			bool=false;
+			String role=sc.nextLine();
+			if(role.isBlank())
+				System.out.println("Please Enter Appropriate Employee Role");
+			else
+			{
+				emp.setE_role(role);
+			bool=true;
+				
+		}
+		}while(bool==false);
+		System.out.println("Enter Employee Salary");
+		do {
+			bool=false;
+			bool=sc.hasNextDouble();
+			if(bool)
+			{
+				emp.setE_salary(sc.nextDouble());
+				if(emp.getE_salary()>0)
+				{
+					//System.out.println(emp.getE_salary());
+					bool=true;
+				}
+				else
+					bool=false;
+				
+			}
+			else
+			{
+				temp=sc.next();
+			}
+			if(bool==false)
+				System.out.println("Please Enter Appropriate Salary");
+		}
+		while(bool==false);
+		sc.nextLine();
+		System.out.println("Enter Employee Address");
+		do {
+			bool=false;
+			String add=sc.nextLine();
+			if(add.isBlank())
+				System.out.println("Please Enter Appropriate Address");
+			else
+			{
+				emp.setE_address(add);
+			bool=true;
+				
+		}
+		}
+		while(bool==false);
+		
+		System.out.println("Enter Employee e-mail address");
+		bool=true;
+		do
+		{
+			bool=false;
+			bool=sc.hasNext("[a-zA-Z0-9_+&*-]+(?:\\."+"[a-zA-Z0-9_+&*-]+)*@" +"(?:[a-zA-Z0-9-]+\\.)+[a-z" +"A-Z]{2,7}$");
+
+			if(bool)
+			{
+				emp.setE_email(sc.next());
+				bool=true;
+			}
+			else
+			{
+				temp=sc.next();
+				System.out.println("Please enter a valid Email address");
+			}
+
+		}while(!bool);
+
+	}
+	public void displayEmployeeDetails(Employee em)
+	{
+		System.out.println("Employee Id=   "+em.getE_id());
+		System.out.println("Employee Name=   "+em.getE_name());
+		System.out.println("Employee Role=   "+em.getE_role());
+		System.out.println("Employee Contact Number=   "+em.getE_contact_no());
+		System.out.println("Employee Salary=   "+em.getE_salary());
+		System.out.println("Employee  Address=   "+em.getE_address());
+		System.out.println("Employee Email Address=   "+em.getE_email());
+	}
 	public void checkIfAlreadyPesent(Employee emp)
 	{
 		int flag = 0;//turns 1 if an employee is found
@@ -238,140 +371,8 @@ public class Employeeimplementation {
 			System.out.println("There is no employee undder this role"); 
 		}
 	}
-	private void acceptEmployeeDetails(Employee emp)
-	{
-		String temp;
-		//System.out.println("Enter Employee Id");
-		//e_id=sc.nextInt();
-		boolean bool=true;
-		System.out.println("Enter Employee Name");
-		do {
-			bool=false;
-			String name=sc.nextLine();
-			if(name.isBlank())
-				System.out.println("Please Enter Appropriate Employee Name");
-			else
-			{
-				emp.setE_name(name);
-			bool=true;
-				
-		}
-		}while(bool==false);
-		System.out.println("Enter Employee Contact Number");
-	    bool = true;
-	    do
-	    {
-			bool=false;
-			String contactNo=sc.nextLine();
-			if(contactNo.isBlank())
-			{
-				bool=false;
-			}
-			else//when alphabets are entered
-			{
-				bool=Pattern.matches("[6789]{1}[0-9]{9}",contactNo);
-				if(bool)
-				{
-					bool=true;
-					emp.setE_contact_no(contactNo);//contact number starts with 6,7,8,9 and have 10 digits
-				}
-				else
-				{
-					bool=false;
-				}
-			}
-				if(bool==false)
-				{
-					System.out.println("Please Enter Appropriate Contact Number!!!");
-				}
-
-		}while(bool==false);
-		//sc.nextLine();
-		System.out.println("Enter Employee Role");
-		do {
-			bool=false;
-			String role=sc.nextLine();
-			if(role.isBlank())
-				System.out.println("Please Enter Appropriate Employee Role");
-			else
-			{
-				emp.setE_role(role);
-			bool=true;
-				
-		}
-		}while(bool==false);
-		System.out.println("Enter Employee Salary");
-		do {
-			bool=false;
-			bool=sc.hasNextDouble();
-			if(bool)
-			{
-				emp.setE_salary(sc.nextDouble());
-				if(emp.getE_salary()>0)
-				{
-					//System.out.println(emp.getE_salary());
-					bool=true;
-				}
-				else
-					bool=false;
-				
-			}
-			else
-			{
-				temp=sc.next();
-			}
-			if(bool==false)
-				System.out.println("Please Enter Appropriate Salary");
-		}
-		while(bool==false);
-		sc.nextLine();
-		System.out.println("Enter Employee Address");
-		do {
-			bool=false;
-			String add=sc.nextLine();
-			if(add.isBlank())
-				System.out.println("Please Enter Appropriate Address");
-			else
-			{
-				emp.setE_address(add);
-			bool=true;
-				
-		}
-		}
-		while(bool==false);
+	
 		
-		System.out.println("Enter Employee e-mail address");
-		bool=true;
-		do
-		{
-			bool=false;
-			bool=sc.hasNext("[a-zA-Z0-9_+&*-]+(?:\\."+"[a-zA-Z0-9_+&*-]+)*@" +"(?:[a-zA-Z0-9-]+\\.)+[a-z" +"A-Z]{2,7}$");
-
-			if(bool)
-			{
-				emp.setE_email(sc.next());
-				bool=true;
-			}
-			else
-			{
-				temp=sc.next();
-				System.out.println("Please enter a valid Email address");
-			}
-
-		}while(!bool);
-
-
-	}
-	public void displayEmployeeDetails(Employee em)
-	{
-		System.out.println("Employee Id=   "+em.getE_id());
-		System.out.println("Employee Name=   "+em.getE_name());
-		System.out.println("Employee Role=   "+em.getE_role());
-		System.out.println("Employee Contact Number=   "+em.getE_contact_no());
-		System.out.println("Employee Salary=   "+em.getE_salary());
-		System.out.println("Employee  Address=   "+em.getE_address());
-		System.out.println("Employee Email Address=   "+em.getE_email());
-	}
 	public void higest_salary()
 	{
 		boolean result =false;
