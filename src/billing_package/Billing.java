@@ -1,5 +1,6 @@
 package billing_package;
 import product_package.ProductImplementation;
+import stock_package.Stock;
 import linkedlist_package.LinkedList;
 import linkedlist_package.Node;
 import java.sql.Connection;
@@ -9,6 +10,8 @@ import java.sql.Statement;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Scanner;
+
+import dealer_package.DealerImplementation;
 
 public class Billing 
 {
@@ -28,8 +31,8 @@ public class Billing
 	private String customername;
 
 	Scanner sc=new Scanner(System.in);
-	LinkedList cll=new LinkedList();
-	LinkedList pll=new LinkedList();
+	public LinkedList cll=new LinkedList();
+	public LinkedList pll=new LinkedList();
 	//ProductImplementation product=new ProductImplementation();
 
 	public Billing()
@@ -45,7 +48,7 @@ public class Billing
 		try
 		{
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			con=DriverManager.getConnection("jdbc:mysql://localhost:3306/supermarketmanagementsystem", 
+			con=DriverManager.getConnection("jdbc:mysql://localhost:3306/supermarket", 
 					"root","root");
 			st=con.createStatement();
 			rs=st.executeQuery("select * from customer");
@@ -146,7 +149,7 @@ public class Billing
 		printBill();
 	}
 
-	public void billCalculation(ProductImplementation product)
+	private void billCalculation(ProductImplementation product)
 	{
 		String yorn="";
 		Boolean bool=true;
@@ -181,7 +184,7 @@ public class Billing
 				Statement st;
 				ResultSet rs;
 				Class.forName("com.mysql.cj.jdbc.Driver");
-				con=DriverManager.getConnection("jdbc:mysql://localhost:3306/supermarketmanagementsystem", 
+				con=DriverManager.getConnection("jdbc:mysql://localhost:3306/supermarket", 
 						"root","root");
 				st=con.createStatement();
 				rs=st.executeQuery("select productBrand,productMrp,productQuantity from products where productID="+prod_id);
@@ -274,7 +277,7 @@ public class Billing
 		grand_total=total+tax;
 	}
 
-	public void updatePoints()
+	private void updatePoints()
 	{
 		int flag=0;
 		Node currentNode=cll.getHead();
@@ -290,7 +293,7 @@ public class Billing
 		}
 	}
 
-	public void printBill()
+	private void printBill()
 	{
 		System.out.println("\tALL IN ONE Supermarket");
 		System.out.println("Bill NO.:"+bill_no);
@@ -352,7 +355,7 @@ public class Billing
 		}
 	}
 
-	public void addCustomer(String phno) 
+	private void addCustomer(String phno) 
 	{  
 		boolean bool=true;
 		System.out.println("**New Customer.Accept details.**");
@@ -372,7 +375,6 @@ public class Billing
 				  bool=true;
 			  }
 		  }while(!bool);
-		 
 		
 		Customer cobj=new Customer();
 		cobj.setC_name(customername);
