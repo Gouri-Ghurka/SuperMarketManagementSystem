@@ -7,8 +7,9 @@ import java.util.Scanner;
 import java.util.regex.Pattern;
 import linkedlist_package.LinkedList;
 import linkedlist_package.Node;
-public class Employeeimplementation {
-	LinkedList ll = new LinkedList();
+public class Employeeimplementation 
+{
+	public LinkedList ll = new LinkedList();
 	Scanner sc=new Scanner(System.in);
 	public void addEmployee()
 	{
@@ -33,14 +34,14 @@ public class Employeeimplementation {
 			else
 			{
 				emp.setE_name(name);
-			bool=true;
-				
-		}
+				bool=true;
+
+			}
 		}while(bool==false);
 		System.out.println("Enter Employee Contact Number");
-	    bool = true;
-	    do
-	    {
+		bool = true;
+		do
+		{
 			bool=false;
 			String contactNo=sc.nextLine();
 			if(contactNo.isBlank())
@@ -60,10 +61,10 @@ public class Employeeimplementation {
 					bool=false;
 				}
 			}
-				if(bool==false)
-				{
-					System.out.println("Please Enter Appropriate Contact Number!!!");
-				}
+			if(bool==false)
+			{
+				System.out.println("Please Enter Appropriate Contact Number!!!");
+			}
 
 		}while(bool==false);
 		//sc.nextLine();
@@ -76,9 +77,9 @@ public class Employeeimplementation {
 			else
 			{
 				emp.setE_role(role);
-			bool=true;
-				
-		}
+				bool=true;
+
+			}
 		}while(bool==false);
 		System.out.println("Enter Employee Salary");
 		do {
@@ -94,7 +95,7 @@ public class Employeeimplementation {
 				}
 				else
 					bool=false;
-				
+
 			}
 			else
 			{
@@ -114,12 +115,12 @@ public class Employeeimplementation {
 			else
 			{
 				emp.setE_address(add);
-			bool=true;
-				
-		}
+				bool=true;
+
+			}
 		}
 		while(bool==false);
-		
+
 		System.out.println("Enter Employee e-mail address");
 		bool=true;
 		do
@@ -188,49 +189,49 @@ public class Employeeimplementation {
 
 	public void deleteEmployee(Scanner sc)
 	{
-	int id = 0;
-	Boolean bool = true;
-	System.out.println("Enter the employee ID for the employee to be deleted");
-	do
-	{
-	bool = sc.hasNextInt();
-	if(bool)
-	{
-	id = sc.nextInt();
-	}
-	else
-	{
-	String s =  sc.next();
-	System.out.println("Please enter a valid ID");
-	}
+		int id = 0;
+		Boolean bool = true;
+		System.out.println("Enter the employee ID for the employee to be deleted");
+		do
+		{
+			bool = sc.hasNextInt();
+			if(bool)
+			{
+				id = sc.nextInt();
+			}
+			else
+			{
+				String s =  sc.next();
+				System.out.println("Please enter a valid ID");
+			}
 
-	}while(!bool);
+		}while(!bool);
 
-	Node result=searchEmployeeBasedOnID(id);
-	ll.deleteNode(result);
+		Node result=searchEmployeeBasedOnID(id);
+		ll.deleteNode(result);
 	}
 	public Node searchEmployeeBasedOnID(int id)
 	{
-	Node result=null;
+		Node result=null;
 
-	if(ll.getHead()==null)
-	{
-	System.out.println("Empty list. Cannot search");
-	}
-	else
-	{
+		if(ll.getHead()==null)
+		{
+			System.out.println("Empty list. Cannot search");
+		}
+		else
+		{
 
-	Node temp = ll.getHead();
-	while(temp!=null)  //traverse till the end
-	{
-	if((((Employee)temp.getData()).getE_id())==id)
-	{
-	result=temp;
-	}
-	temp = temp.getNext();
-	}
-	}
-	return result;
+			Node temp = ll.getHead();
+			while(temp!=null)  //traverse till the end
+			{
+				if((((Employee)temp.getData()).getE_id())==id)
+				{
+					result=temp;
+				}
+				temp = temp.getNext();
+			}
+		}
+		return result;
 
 	}
 
@@ -246,7 +247,7 @@ public class Employeeimplementation {
 			Node temp = ll.getHead();
 			while(temp!=null)  //traverse till the end
 			{
-			this.displayEmployeeDetails((Employee)temp.getData());
+				this.displayEmployeeDetails((Employee)temp.getData());
 				temp = temp.getNext();
 			}
 		}
@@ -283,30 +284,30 @@ public class Employeeimplementation {
 	}
 	public void addToDatabase()
 	{
-			Connection con ;
-			Statement st;
-			try
+		Connection con ;
+		Statement st;
+		try
+		{
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			con=DriverManager.getConnection("jdbc:mysql://localhost:3306/supermarket","root","root");
+			st=con.createStatement();
+			st.executeUpdate("delete from empdata");
+			Node temp=ll.getHead();
+			while(temp!=null)
 			{
-				Class.forName("com.mysql.cj.jdbc.Driver");
-				con=DriverManager.getConnection("jdbc:mysql://localhost:3306/supermarket","root","root");
-				st=con.createStatement();
-				st.executeUpdate("delete from empdata");
-				Node temp=ll.getHead();
-				while(temp!=null)
-				{
-					Employee e = (Employee) temp.getData();
-					
-					st.executeUpdate("insert into empdata(ID,NAME,CONTACT,ROLE,SALARY,ADDRESS,EMAILID)values("+e.getE_id()+",'"+e.getE_name()+"','"+e.getE_contact_no()+"','"+e.getE_role()+"',"+e.getE_salary()+",'"+e.getE_address()+"','"+e.getE_email()+"')");
-					temp=temp.getNext();
-				}
-				st.close();
-				con.close();
+				Employee e = (Employee) temp.getData();
+
+				st.executeUpdate("insert into empdata(ID,NAME,CONTACT,ROLE,SALARY,ADDRESS,EMAILID)values("+e.getE_id()+",'"+e.getE_name()+"','"+e.getE_contact_no()+"','"+e.getE_role()+"',"+e.getE_salary()+",'"+e.getE_address()+"','"+e.getE_email()+"')");
+				temp=temp.getNext();
 			}
-			catch(Exception e)
-			{
-				System.out.println(e);
-			}
+			st.close();
+			con.close();
 		}
+		catch(Exception e)
+		{
+			System.out.println(e);
+		}
+	}
 	public void retrieveFromDataBase()
 	{
 		Connection con=null;
@@ -372,8 +373,8 @@ public class Employeeimplementation {
 			System.out.println("There is no employee undder this role"); 
 		}
 	}
-	
-		
+
+
 	public void higest_salary()
 	{
 		boolean result =false;
