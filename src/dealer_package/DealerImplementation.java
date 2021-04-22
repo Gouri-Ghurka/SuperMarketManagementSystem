@@ -13,7 +13,7 @@ import linkedlist_package.Node;
 public class DealerImplementation 
 {
 
-	LinkedList ll=new LinkedList();
+	public LinkedList ll=new LinkedList();
 	Scanner sc=new Scanner(System.in);
 	public void retrieve()//to retrieve the existing data from database
 	{
@@ -64,25 +64,26 @@ public class DealerImplementation
 		boolean check=false;
 		String temp;
 		System.out.println("Enter Dealer Name");
+		//sc.nextLine();
 		do
 		{
 			check=false;
-		
-				String name=sc.nextLine();
-				if(name.isBlank())
-				{
-					//temp=sc.nextLine();
-					System.out.println("Please Enter Appropriate Name!!!");
-					check=false;
-					
-				}
-				else
-				{
-					d.setD_name(name);
-					check=true;
-				}
+
+			String name=sc.nextLine();
+			if(name.isBlank())
+			{
+				//temp=sc.nextLine();
+				System.out.println("Please Enter Appropriate Name!!!");
+				check=false;
+
+			}
+			else
+			{
+				d.setD_name(name);
+				check=true;
+			}
 		}while(check==false);
-		
+
 		System.out.println("Enter Dealer Category");
 		do
 		{
@@ -146,7 +147,7 @@ public class DealerImplementation
 			{
 				d.setD_email(email);
 				check=true;
-			
+
 			}
 
 		}while(check==false);
@@ -159,7 +160,7 @@ public class DealerImplementation
 			if(address.isBlank())
 			{
 				System.out.println("Please Enter Appropriate Address!!!");
-				
+
 			}
 			else
 			{
@@ -192,10 +193,10 @@ public class DealerImplementation
 					check=false;
 				}
 			}
-				if(check==false)
-				{
-					System.out.println("Please Enter Appropriate Contact Number!!!");
-				}
+			if(check==false)
+			{
+				System.out.println("Please Enter Appropriate Contact Number!!!");
+			}
 
 		}while(check==false);
 
