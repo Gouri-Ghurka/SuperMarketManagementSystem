@@ -4,7 +4,7 @@ import linkedlist_package.*;
 import java.util.Scanner;
 
 import java.sql.*;
-//make accept details private
+
 public class ProductImplementation
 {
 	public LinkedList ll = new LinkedList();
@@ -15,9 +15,9 @@ public class ProductImplementation
 		this.acceptNameBrandQuantity(sc,p);
 		this.checkIfAlreadyPesent(p,sc);
 	}
-
+	
 	//accept these details to check if the product is existing or not
-	private void acceptNameBrandQuantity(Scanner sc,Product p)
+	public void acceptNameBrandQuantity(Scanner sc,Product p)
 	{
 		Boolean bool = true;
 		String str = "";
@@ -75,7 +75,7 @@ public class ProductImplementation
 	}
 
 	//accept these details only if the product does not exist
-	private void acceptCategoryCpMrp(Scanner sc,Product p)
+	public void acceptCategoryCpMrp(Scanner sc,Product p)
 	{
 		Boolean bool = true;
 		String str = "";
@@ -130,17 +130,18 @@ public class ProductImplementation
 		}while(!bool);
 
 	}
-
+	
 	public void displayProductDetails(Product p)
-	{
-		System.out.println("Product ID = "+p.getProductID());
-		System.out.println("Product Name = "+p.getProductName());
-		System.out.println("Product Brand = "+p.getBrand());
-		System.out.println("Product Category = "+p.getCategory());
-		System.out.println("Product Cost Price = "+p.getCostPrice());
-		System.out.println("Product MRP = "+p.getMrp());
-		System.out.println("Product Quantity available = "+p.getProductQuantity());
-	}
+	 {
+		 System.out.println("Product ID = "+p.getProductID());
+		 System.out.println("Product Name = "+p.getProductName());
+		 System.out.println("Product Brand = "+p.getBrand());
+		 System.out.println("Product Category = "+p.getCategory());
+		 System.out.println("Product Cost Price = "+p.getCostPrice());
+		 System.out.println("Product MRP = "+p.getMrp());
+		 System.out.println("Product Quantity available = "+p.getProductQuantity());
+		 System.out.println("----------------------------------------------");
+	 }
 
 	public void checkIfAlreadyPesent(Product p, Scanner sc)
 	{
@@ -216,6 +217,7 @@ public class ProductImplementation
 				temp = temp.getNext();
 			}
 		}
+		
 	}
 
 	public void printProductDetailsBasedOnID(Scanner sc)
@@ -235,9 +237,9 @@ public class ProductImplementation
 		}
 	}
 
-	public Node searchProductBasedOnID(int id)
+	private Node searchProductBasedOnID(int id)
 	{
-		//boolean result = false;
+		Node result = null;
 
 		if(ll.getHead()==null)
 		{
@@ -251,12 +253,12 @@ public class ProductImplementation
 			{
 				if((((Product)temp.getData()).getProductID())==id)
 				{
-					return temp;
+					result =  temp;
 				}
 				temp = temp.getNext();
 			}
 		}
-		return null;
+		return result;
 
 	}
 
@@ -300,7 +302,7 @@ public class ProductImplementation
 		try
 		{
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			con=DriverManager.getConnection("jdbc:mysql://localhost:3306/supermarket","root","root");
+			con=DriverManager.getConnection("jdbc:mysql://localhost:3306/supermarket","root","root_loop");
 			st=con.createStatement();
 			st.executeUpdate("delete from products");
 			if(ll.getHead()==null)
@@ -339,7 +341,7 @@ public class ProductImplementation
 		try
 		{
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			con=DriverManager.getConnection("jdbc:mysql://localhost:3306/supermarket","root","root");
+			con=DriverManager.getConnection("jdbc:mysql://localhost:3306/supermarket","root","root_loop");
 			st=con.createStatement();
 			rs=st.executeQuery("select * from products");
 			while(rs.next())//this loop executes till the table contents are exhausted. Doesn't stop at the end of a row
@@ -388,7 +390,7 @@ public class ProductImplementation
 		}
 	}
 
-
+	
 	public Node mergeSort()
 	{
 		LinkedList sorted = new LinkedList();
@@ -399,7 +401,7 @@ public class ProductImplementation
 			sorted.insertLast((Object)temp.getData());
 			temp = temp.getNext();
 		}
-
+		
 		if(sorted.getHead()==null)
 		{
 			System.out.println("Empty list. Cannot sort");
@@ -417,7 +419,7 @@ public class ProductImplementation
 		}
 		return sorted.getHead();
 	}
-
+	
 	private Node split(Node head)
 	{
 		Node mid = null;
@@ -425,7 +427,7 @@ public class ProductImplementation
 		Node result = null;
 		Node head1 = null;
 		Node head2 = null;
-
+		
 		if(head==null || head.getNext()==null)//there is no list left or there is a single element left.
 		{
 			result = head;
@@ -435,17 +437,17 @@ public class ProductImplementation
 			mid = calculateMid(head);
 			nextOfMid = mid.getNext();
 			mid.setNext(null);//indicates end of divided list(1st half)
-
+		
 			//head holds 1st node of 1st half
 			//nextOfMid holds 1st node of 2nd half
-
+			
 			head1 = split(head);
 			head2 = split(nextOfMid);
 			result = merge(head1,head2);
 		}
 		return result;
 	}
-
+	
 	private Node merge(Node head1,Node head2)
 	{
 		Node head = null;//will store the head of two merged lists
@@ -480,12 +482,12 @@ public class ProductImplementation
 		}
 		return head;
 	}
-
+	
 	private Node calculateMid(Node head)
 	{
 		//slow moves at half the speed of fast.
 		//till fast reaches the end of the list, slow points to the mid node
-
+		
 		Node slow = null;
 		Node fast = null;
 		if (head!=null) 
@@ -501,7 +503,7 @@ public class ProductImplementation
 		}
 		return slow;
 	}
-
+	
 	//just written if in case no of products in the market has to be known
 	public int calculateLengthOfLinkedList(LinkedList templl)
 	{
@@ -514,17 +516,41 @@ public class ProductImplementation
 		}
 		return len;
 	}
-
+	
+	public void displayProductsAboutToFinish()
+	{
+		if(ll.getHead()==null)
+		{
+			System.out.println("Empty list");
+		}
+		else
+		{
+			Node temp = ll.getHead();
+			while(temp!=null)  //traverse till the end
+			{
+				if(((Product)temp.getData()).getProductQuantity()<=15)
+				{
+					this.displayProductDetails((Product)temp.getData());
+				}
+				temp = temp.getNext();
+			}
+		}
+	}
+	
 	public void updateCost(int id,int mrp,int cost)
 	{
 		Node nodeToBeUpdated = null;
 		nodeToBeUpdated = this.searchProductBasedOnID(id);
-		((Product)nodeToBeUpdated.getData()).setProductMrp(mrp);
-		((Product)nodeToBeUpdated.getData()).setProductCostPrice(cost);;
+		if(nodeToBeUpdated==null)
+		{
+			System.out.println("Product not found");
+		}
+		else
+		{
+			((Product)nodeToBeUpdated.getData()).setProductMrp(mrp);
+			((Product)nodeToBeUpdated.getData()).setProductCostPrice(cost);
+		}
+		
 	}
-
-	public void emptyLinkedList()
-	{
-		ll.setHead(null);
-	}
+	
 }
