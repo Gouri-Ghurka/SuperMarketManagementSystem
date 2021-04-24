@@ -110,7 +110,7 @@ public class User
 							switch(functionChoice)
 							{
 							case 1: piobj.displayList();
-							System.out.println("Number of products in the market are: "+piobj.calculateLengthOfLinkedList(templl));
+							System.out.println("Number of products in the market are: "+piobj.calculateLengthOfLinkedList(piobj.ll));
 							break;
 							case 2: empobj.displayList();
 							break;
@@ -162,6 +162,7 @@ public class User
 							switch(inventoryChoice)
 							{
 							case 1: piobj.displayList();
+							System.out.println("Number of products in the market are: "+piobj.calculateLengthOfLinkedList(piobj.ll));
 							break;
 							case 2: sobj.checkstock(piobj,diobj);
 							break;
