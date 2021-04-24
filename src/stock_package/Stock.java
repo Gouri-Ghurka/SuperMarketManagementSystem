@@ -6,7 +6,7 @@ import linkedlist_package.Node;
 public class Stock 
 {
 	Scanner sc=new Scanner(System.in);
-	public void checkQuantity(ProductImplementation piobj,DealerImplementation dobj)
+	public void checkStock(ProductImplementation piobj,DealerImplementation dobj)
 	{
 		String pdtBrand="";
 		String pdtName="";

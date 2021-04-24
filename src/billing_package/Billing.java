@@ -33,14 +33,8 @@ public class Billing
 	Scanner sc=new Scanner(System.in);
 	public LinkedList cll=new LinkedList();
 	public LinkedList pll=new LinkedList();
-	//ProductImplementation product=new ProductImplementation();
 
-	public Billing()
-	{
-		this.bill_no=Billing.billNoGenerator++;
-	}
-
-	public void retrive()
+	public void retrieve()
 	{
 		Connection con;
 		Statement st;
@@ -51,7 +45,7 @@ public class Billing
 			con=DriverManager.getConnection("jdbc:mysql://localhost:3306/supermarket", 
 					"root","root");
 			st=con.createStatement();
-			rs=st.executeQuery("select * from customer");
+			rs=st.executeQuery("select * from customers");
 			while(rs.next())
 			{
 				Customer cobj=new Customer();
@@ -95,6 +89,7 @@ public class Billing
 
 	public void billGeneration(ProductImplementation product) 
 	{
+		this.bill_no=Billing.billNoGenerator++;
 		phoneno=this.acceptCustomerPhoneNO();
 		Node currentNode=cll.getHead();
 		int flag=0;
@@ -326,7 +321,7 @@ public class Billing
 		System.out.println("-----------------------------------------------");
 		System.out.format("%15s %5s %6s %8.2f\n","GRAND TOTAL"," "," ",grand_total);
 		System.out.println("-----------------------------------------------");
-		System.out.format("%30s","*THANK YOU.VISIT AGAIN*");
+		System.out.format("%30s","*THANK YOU.VISIT AGAIN*\n");
 	}
 
 	public void loadIntoDatabase()
@@ -336,14 +331,14 @@ public class Billing
 		try 
 		{ 
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			con=DriverManager.getConnection("jdbc:mysql://localhost:3306/supermarketmanagementsystem", "root","root");
+			con=DriverManager.getConnection("jdbc:mysql://localhost:3306/supermarket", "root","root");
 			st=con.createStatement();
-			st.executeUpdate("delete from customer");
+			st.executeUpdate("delete from customers");
 			Node currentNode=cll.getHead();
 			while(currentNode!=null)
 			{
 				Customer c=(Customer) currentNode.getData();
-				st.executeUpdate("insert into customer values ('"+c.getC_name()+"',"+c.getC_phone_no()+","+c.getTot_points()+")");
+				st.executeUpdate("insert into customers values ('"+c.getC_name()+"',"+c.getC_phone_no()+","+c.getTot_points()+")");
 				currentNode=currentNode.getNext();
 			}
 			st.close();
@@ -375,11 +370,62 @@ public class Billing
 				  bool=true;
 			  }
 		  }while(!bool);
+		  
+		  //sc.nextLine();
+			/*
+			 * System.out.println("Enter Customer Name Again:"); do {
+			 * 
+			 * customername=sc.nextLine(); if(customername.isBlank()) {
+			 * System.out.println("please enter valid customer name"); bool=false; } else {
+			 * bool=true; } }while(!bool);
+			 */
 		
 		Customer cobj=new Customer();
 		cobj.setC_name(customername);
 		cobj.setC_phone_no(phno);
 		cobj.setTot_points(0);//new customer points are always zero
 		cll.insertLast(cobj);	  
+	}
+
+
+	public static void main(String[] args)
+	{
+		/*
+		 * Scanner sc=new Scanner(System.in);
+		 * 
+		 * 
+		 * //System.out.println("1.Add a new product"); int ch=sc.nextInt();
+		 * ProductImplementation product=new ProductImplementation();
+		 * DealerImplementation dealer=new DealerImplementation();
+		 * product.retrieveFromDataBase(); dealer.retrieve(); //dealer.displayList();
+		 * //product.addProduct(sc);
+		 * 
+		 * 
+		 * 
+		 * Stock sobj=new Stock(); sobj.checkQuantity(product,dealer);
+		 * 
+		 * product.addToDataBase()
+		 */;
+			
+		 ProductImplementation product=new ProductImplementation();
+		 product.retrieveFromDataBase();
+			  Billing bobj1=new Billing(); 
+			  bobj1.retrieve(); 
+			  bobj1.billGeneration(product);
+			  
+			  bobj1.billGeneration(product);
+			  bobj1.loadIntoDatabase();
+			 
+			 
+			 
+			
+			   
+			 
+		 
+		
+		/*
+		 * Billing bobj2=new Billing(); bobj2.retrive(); bobj2.billGeneration();
+		 * bobj2.loadIntoDatabase();
+		 */
 	}
 }
