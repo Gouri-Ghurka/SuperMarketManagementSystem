@@ -1,3 +1,4 @@
+
 package product_package;
 import linkedlist_package.*;
 
@@ -19,43 +20,81 @@ public class ProductImplementation
 	//accept these details to check if the product is existing or not
 	public void acceptNameBrandQuantity(Scanner sc,Product p)
 	{
+		String temp = "";
 		Boolean bool = true;
-		String str = "";
 		System.out.println("Enter the Product name");
-		sc.nextLine();
-		do
+		temp = sc.nextLine();
+		if(temp.isEmpty())
 		{
-			str = sc.nextLine();
-			if(str.isBlank())
+			do 
 			{
-				System.out.println("Please enter a valid product name");
-				bool = false;
-			}
-			else
+				temp = sc.nextLine();
+				if(temp.isBlank())
+				{
+					System.out.println("Please enter a valid product name");
+					bool = false;
+				}
+				else
+				{
+					p.setProductName(temp);
+					bool = true;
+				}
+			}while(bool==false);
+		}
+		else
+		{
+			do 
 			{
-				bool = true;
-			}
-
-		}while(!bool);
-		p.setProductName(str);
+				if(temp.isBlank())
+				{
+					System.out.println("Please enter a valid product name");
+					temp = sc.nextLine();
+					bool = false;
+				}
+				else
+				{
+					p.setProductName(temp);
+					bool = true;
+				}
+			}while(bool==false);
+		}
 
 		System.out.println("Enter the Product brand");
-		str = "";
-		do
+		temp = sc.nextLine();
+		if(temp.isEmpty())
 		{
-			str = sc.nextLine();
-			if(str.isBlank())
+			do 
 			{
-				System.out.println("Please enter a valid product brand");
-				bool = false;
-			}
-			else
+				temp = sc.nextLine();
+				if(temp.isBlank())
+				{
+					System.out.println("Please enter a valid product brand");
+					bool = false;
+				}
+				else
+				{
+					p.setProductBrand(temp);
+					bool = true;
+				}
+			}while(bool==false);
+		}
+		else
+		{
+			do 
 			{
-				bool = true;
-			}
-
-		}while(!bool);
-		p.setProductBrand(str);
+				if(temp.isBlank())
+				{
+					System.out.println("Please enter a valid product brand");
+					temp = sc.nextLine();
+					bool = false;
+				}
+				else
+				{
+					p.setProductBrand(temp);
+					bool = true;
+				}
+			}while(bool==false);
+		}
 
 		System.out.println("Enter the Product Quantity");
 		do
@@ -67,7 +106,7 @@ public class ProductImplementation
 			}
 			else
 			{
-				String s =  sc.next();
+				temp =  sc.next();
 				System.out.println("Please enter a valid Quantity");
 			}
 
@@ -78,24 +117,43 @@ public class ProductImplementation
 	public void acceptCategoryCpMrp(Scanner sc,Product p)
 	{
 		Boolean bool = true;
-		String str = "";
+		String temp = "";
 		System.out.println("Enter the Product category");
-		sc.nextLine();
-		do
+		temp = sc.nextLine();
+		if(temp.isEmpty())
 		{
-			str = sc.nextLine();
-			if(str.isBlank())
+			do 
 			{
-				System.out.println("Please enter a valid product category");
-				bool = false;
-			}
-			else
+				temp = sc.nextLine();
+				if(temp.isBlank())
+				{
+					System.out.println("Please enter a valid product category");
+					bool = false;
+				}
+				else
+				{
+					p.setProductCategory(temp);
+					bool = true;
+				}
+			}while(bool==false);
+		}
+		else
+		{
+			do 
 			{
-				bool = true;
-			}
-
-		}while(!bool);
-		p.setProductCategory(str);
+				if(temp.isBlank())
+				{
+					System.out.println("Please enter a valid product category");
+					temp = sc.nextLine();
+					bool = false;
+				}
+				else
+				{
+					p.setProductBrand(temp);
+					bool = true;
+				}
+			}while(bool==false);
+		}
 
 		System.out.println("Enter the Product Cost Price");
 		do
@@ -107,7 +165,7 @@ public class ProductImplementation
 			}
 			else
 			{
-				String s = sc.next();
+				temp = sc.next();
 				System.out.println("Please enter a valid cost price");
 			}
 
@@ -123,7 +181,7 @@ public class ProductImplementation
 			}
 			else
 			{
-				String s =  sc.next();
+				temp =  sc.next();
 				System.out.println("Please enter a valid MRP");
 			}
 
@@ -302,7 +360,7 @@ public class ProductImplementation
 		try
 		{
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			con=DriverManager.getConnection("jdbc:mysql://localhost:3306/supermarket","root","root_loop");
+			con=DriverManager.getConnection("jdbc:mysql://localhost:3306/supermarket","root","root");
 			st=con.createStatement();
 			st.executeUpdate("delete from products");
 			if(ll.getHead()==null)
@@ -341,7 +399,7 @@ public class ProductImplementation
 		try
 		{
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			con=DriverManager.getConnection("jdbc:mysql://localhost:3306/supermarket","root","root_loop");
+			con=DriverManager.getConnection("jdbc:mysql://localhost:3306/supermarket","root","root");
 			st=con.createStatement();
 			rs=st.executeQuery("select * from products");
 			while(rs.next())//this loop executes till the table contents are exhausted. Doesn't stop at the end of a row
