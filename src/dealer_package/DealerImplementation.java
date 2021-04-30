@@ -134,40 +134,8 @@ public class DealerImplementation
 			}
 
 		}while(check==false);
-		System.out.println("Enter Dealer e-mail address");
-		do
-		{
-			check=false;
-			String email=sc.nextLine();
-			if(email.isBlank())
-			{
-				System.out.println("Please Enter Appropriate Email-Address!!!");
-			}
-			else
-			{
-				d.setD_email(email);
-				check=true;
 
-			}
 
-		}while(check==false);
-
-		System.out.println("Enter Dealer Address");
-		do
-		{
-			check=false;
-			String address=sc.nextLine();
-			if(address.isBlank())
-			{
-				System.out.println("Please Enter Appropriate Address!!!");
-
-			}
-			else
-			{
-				check=true;
-			}
-
-		}while(check==false);
 
 
 
@@ -199,6 +167,51 @@ public class DealerImplementation
 			}
 
 		}while(check==false);
+		System.out.println("Enter Email-Address");
+		do
+		{
+			check=false;
+			String email=sc.nextLine();
+			if(email.isBlank())
+			{
+				check=false;
+			}
+			else
+			{
+				check=Pattern.matches("[a-zA-Z0-9_+&*-]+(?:\\."+"[a-zA-Z0-9_+&*-]+)*@" +"(?:[a-zA-Z0-9-]+\\.)+[a-z" +"A-Z]{2,7}$",email);
+				if(check)
+				{
+					check=true;
+					d.setD_email(email);
+				}
+				else
+				{
+					check=false;
+				}
+			}
+			if(check==false)
+			{
+				System.out.println("Please Enter Appropriate Email-Address!!!");
+			}
+
+		}while(check==false);
+		System.out.println("Enter Dealer Address");
+		do
+		{
+			check=false;
+			String address=sc.nextLine();
+			if(address.isBlank())
+			{
+				System.out.println("Please Enter Appropriate Address!!!");
+
+			}
+			else
+			{
+				check=true;
+			}
+
+		}while(check==false);
+
 
 
 
@@ -297,7 +310,7 @@ public class DealerImplementation
 		Node temp=ll.getHead();
 
 		int flag=0;//turns 1 when dealer with same contact number,product and brand already exists
-		System.out.println("Enter Details of Dealer\n");
+		System.out.println("Enter Details of Dealer");
 		Dealer d=this.acceptDealerDetails();
 		while(temp!=null)
 		{
