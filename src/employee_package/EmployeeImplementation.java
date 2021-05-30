@@ -10,15 +10,14 @@ import linkedlist_package.Node;
 public class EmployeeImplementation 
 {
 	public LinkedList ll = new LinkedList();
-	Scanner sc=new Scanner(System.in);
-	public void addEmployee()
+	public void addEmployee(Scanner sc)
 	{
 		Employee emp=new Employee();
-		this.acceptEmployeeDetails(emp);
+		this.acceptEmployeeDetails(emp,sc);
 		this.checkIfAlreadyPesent(emp);
 		//System.out.println("Executing");
 	}
-	private void acceptEmployeeDetails(Employee emp)
+	private void acceptEmployeeDetails(Employee emp,Scanner sc)
 	{
 		String temp;
 		//System.out.println("Enter Employee Id");
@@ -144,13 +143,9 @@ public class EmployeeImplementation
 	}
 	public void displayEmployeeDetails(Employee em)
 	{
-		System.out.println("Employee Id=   "+em.getE_id());
-		System.out.println("Employee Name=   "+em.getE_name());
-		System.out.println("Employee Role=   "+em.getE_role());
-		System.out.println("Employee Contact Number=   "+em.getE_contact_no());
-		System.out.println("Employee Salary=   "+em.getE_salary());
-		System.out.println("Employee  Address=   "+em.getE_address());
-		System.out.println("Employee Email Address=   "+em.getE_email());
+
+		System.out.format("%-30d %-30s %-30s %-30s %-30f %-40s %-30s",em.getE_id(),em.getE_name(),em.getE_role(),em.getE_contact_no(),em.getE_salary(),em.getE_address(),em.getE_email());
+		System.out.println();
 	}
 	public void checkIfAlreadyPesent(Employee emp)
 	{
@@ -245,11 +240,17 @@ public class EmployeeImplementation
 		else
 		{
 			Node temp = ll.getHead();
+			System.out.println("********************************************************************************************************************************************************************************************************************************************************");
+			System.out.printf("%-30s %-30s %-30s %-30s %-30s %-40s %-30s","EMPLOYEE_ID","EMPLOYEE_NAME","EMPLOYEE_ROLE","EMPLOYEE_CONTACT_NUMBER","EMPLOYEE_SALARY","EMPLOYEE_ADDRESS","EMPLOYEE_EMAIL_ADRESS");
+			System.out.println();
+			System.out.println("********************************************************************************************************************************************************************************************************************************************************");
 			while(temp!=null)  //traverse till the end
 			{
 				this.displayEmployeeDetails((Employee)temp.getData());
 				temp = temp.getNext();
 			}
+			System.out.println("********************************************************************************************************************************************************************************************************************************************************");
+
 		}
 	}
 	public void searchEmployee(Scanner sc)
