@@ -29,7 +29,7 @@ public class Billing
 	private String phoneno;
 	private String customername;
 
-	Scanner sc = new Scanner(System.in);
+	//Scanner sc = new Scanner(System.in);
 	public LinkedList cll=new LinkedList();
 	public LinkedList pll=new LinkedList();
 
@@ -63,12 +63,13 @@ public class Billing
 		}
 	}
 	
-	public String acceptCustomerPhoneNO()
+	public String acceptCustomerPhoneNO(Scanner sc)
 	{
 		Boolean bool=true;
 		String phone="";
 		String temp="";
 		System.out.println("Enter Customer's Contact number"); 
+		sc.nextLine();
 		do 
 		{
 			phone=sc.nextLine();
@@ -89,10 +90,10 @@ public class Billing
 		return phone;
 	}
 
-	public void billGeneration(ProductImplementation product) 
+	public void billGeneration(ProductImplementation product,Scanner sc) 
 	{
 		this.bill_no=Billing.billNoGenerator++;
-		phoneno=this.acceptCustomerPhoneNO();
+		phoneno=this.acceptCustomerPhoneNO(sc);
 		Node currentNode=cll.getHead();
 		int flag=0;
 		while(currentNode!=null && flag==0)
@@ -133,20 +134,20 @@ public class Billing
 			
 			if(yorn.equalsIgnoreCase("n"))
 			{
-				this.acceptCustomerPhoneNO();
+				this.acceptCustomerPhoneNO(sc);
 			}
 		}
 		
 		if(flag==0)
 		{
-			addCustomer(phoneno);
+			addCustomer(phoneno,sc);
 		}
 		
-		billCalculation(product);
+		billCalculation(product,sc);
 		printBill();
 	}
 
-	private void billCalculation(ProductImplementation product)
+	private void billCalculation(ProductImplementation product,Scanner sc)
 	{
 		String yorn="";
 		Boolean bool=true;
@@ -352,7 +353,7 @@ public class Billing
 		}
 	}
 
-	private void addCustomer(String phno) 
+	private void addCustomer(String phno,Scanner sc) 
 	{  
 		boolean bool=true;
 		System.out.println("**New Customer.Accept details.**");

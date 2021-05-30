@@ -1,12 +1,14 @@
 package user_package;
 import java.util.Scanner;
 
+import billing_package.Billing;
+import dealer_package.DealerImplementation;
+import employee_package.EmployeeImplementation;
 import product_package.ProductImplementation;
+import stock_package.Stock;
 
 public class User 
 {
-	
-
 	public static void main(String[] args) 
 	{
 		ProductImplementation piobj = new ProductImplementation();
@@ -50,6 +52,8 @@ public class User
 				}
 
 			}while(!bool);
+			
+			System.out.println();
 
 			switch(open)
 			{
@@ -80,6 +84,8 @@ public class User
 
 					}while(!bool);
 
+					System.out.println();
+					
 					switch(roleChoice)
 					{
 					case 1:
@@ -91,6 +97,10 @@ public class User
 							System.out.println("3. DISPLAY THE DEALER LIST");
 							System.out.println("4. DISPLAY THE PRODUCTS OF A PARTICULAR BRAND");
 							System.out.println("5. CHECK STOCK FOR PRODUCTS WITH QUANTITY LESS THAN 15");
+							System.out.println("6. ADD A NEW EMPLOYEE");
+							System.out.println("7. REMOVE AN EMPLOYEE");
+							System.out.println("8. SEARCH EMPLOYEE ON THE BASIS OF ROLE");
+							System.out.println("9. HIGHEST EMPLOYEE SALARY");
 							System.out.println("0. EXIT");
 							System.out.println("PLEASE ENTER A CHOICE FROM THE ABOVE MENU: ");
 							do
@@ -107,6 +117,9 @@ public class User
 								}
 
 							}while(!bool);
+							
+							System.out.println();
+							
 							switch(functionChoice)
 							{
 							case 1: piobj.displayList();
@@ -119,6 +132,14 @@ public class User
 							case 4: piobj.searchProductBasedOnBrand(sc);
 							break;
 							case 5: piobj.displayProductsAboutToFinish();
+							break;
+							case 6: empobj.addEmployee();
+							break;
+							case 7: empobj.deleteEmployee(sc);
+							break;
+							case 8: empobj.searchEmployeeOnBasisOfRole(sc);
+							break;
+							case 9: empobj.higest_salary();
 							break;
 							case 0: System.out.println("Exiting...");
 							break;
@@ -136,12 +157,12 @@ public class User
 							System.out.println("3. ADD DETAILS OF NEW DEALER");
 							System.out.println("4. DISPLAY DETAILS OF A PARTICULAR DEALER");
 							System.out.println("5. DELETE DETAILS OF A PARTICULAR DEALER");
-							System.out.println("6. ADD NEW PRODUCT");
-							System.out.println("7. UPDATE PRICE OF A PARTICULAR PRODUCT");
-							System.out.println("8. DISPLAY DETAILS OF A PRODUCT BASED ON ID ");
-							System.out.println("9. DISPLAY DETAILS OF PRODUCT BASED ON BRAND");
-							System.out.println("10. DELETE DETAILS OF A PARTICULAR PRODUCT");
-
+							System.out.println("6. DISPLAY THE DEALER LIST");
+							System.out.println("7. ADD NEW PRODUCT");
+							System.out.println("8. UPDATE PRICE OF A PARTICULAR PRODUCT");
+							System.out.println("9. DISPLAY DETAILS OF A PRODUCT BASED ON ID ");
+							System.out.println("10. DISPLAY DETAILS OF PRODUCT BASED ON BRAND");
+							System.out.println("11. DELETE DETAILS OF A PARTICULAR PRODUCT");
 							System.out.println("0. EXIT");
 							System.out.println("PLEASE ENTER A CHOICE FROM THE ABOVE MENU: ");
 							do
@@ -159,22 +180,26 @@ public class User
 
 							}while(!bool);
 							
+							System.out.println();
+							
 							switch(inventoryChoice)
 							{
 							case 1: piobj.displayList();
 							System.out.println("Number of products in the market are: "+piobj.calculateLengthOfLinkedList(piobj.ll));
 							break;
-							case 2: sobj.checkstock(piobj,diobj);
+							case 2: sobj.checkStock(piobj,diobj);
 							break;
-							case 3: diobj.addNewDealer();
+							case 3: diobj.addNewDealer(sc);
 							break;
-							case 4: diobj.displayWithId();
+							case 4: diobj.displayWithId(sc);
 							break;
-							case 5: diobj.deleteWithId();
+							case 5: diobj.deleteWithId(sc);
 							break;
-							case 6: piobj.addProduct(sc);
+							case 6: diobj.displayList();
 							break;
-							case 7: 
+							case 7: piobj.addProduct(sc);
+							break;
+							case 8: 
 								int id = 0;
 								double mrp = 0.0;
 								double cost = 0.0;
@@ -198,7 +223,7 @@ public class User
 
 								do
 								{
-									bool = sc.hasNextInt();
+									bool = sc.hasNextDouble();
 									if(bool)
 									{
 										mrp = sc.nextDouble();
@@ -230,11 +255,11 @@ public class User
 
 								piobj.updateCost(id,mrp,cost);
 								break;
-							case 8: piobj.printProductDetailsBasedOnID(sc);
+							case 9: piobj.printProductDetailsBasedOnID(sc);
 							break;
-							case 9: piobj.searchProductBasedOnBrand(sc);
+							case 10: piobj.searchProductBasedOnBrand(sc);
 							break;
-							case 10:piobj.deleteProduct(sc);
+							case 11: piobj.deleteProduct(sc);
 							break;
 							case 0: System.out.println("Exiting...");
 							break;
@@ -265,11 +290,13 @@ public class User
 									System.out.println("Please enter a valid choice");
 								}
 							}while(!bool);
+							
+							System.out.println();
 
 							switch(billingch)
 							{
 							case 1:
-								bobj.billGeneration(piobj);
+								bobj.billGeneration(piobj,sc);
 								break;
 							case 0:
 								System.out.println("EXITING...");
@@ -301,6 +328,8 @@ public class User
 								}
 
 							}while(!bool);
+							
+							System.out.println();							
 
 							switch(salesChoice)
 							{
@@ -316,7 +345,7 @@ public class User
 
 						break;
 					case 5:
-						empobj.searchEmployeeBasedOnId();
+						empobj.searchEmployee(sc);
 						break;
 					case 0:
 						System.out.println("EXITING...");
@@ -326,12 +355,13 @@ public class User
 						System.out.println("*INVALID CHOICE*");
 					}
 				}while(roleChoice != 0);//while corresponding to roles
+				break;
 
 			case 0:
 				piobj.addToDataBase();
 				empobj.addToDatabase();
 				diobj.addToDatabase();
-				bobj.loadIntoDatbase();
+				bobj.loadIntoDatabase();
 				System.out.println("CLOSING...");
 				break;
 
@@ -343,3 +373,4 @@ public class User
 	}
 
 }
+
