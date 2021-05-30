@@ -191,14 +191,20 @@ public class ProductImplementation
 	
 	public void displayProductDetails(Product p)
 	 {
-		 System.out.println("Product ID = "+p.getProductID());
-		 System.out.println("Product Name = "+p.getProductName());
-		 System.out.println("Product Brand = "+p.getBrand());
-		 System.out.println("Product Category = "+p.getCategory());
-		 System.out.println("Product Cost Price = "+p.getCostPrice());
-		 System.out.println("Product MRP = "+p.getMrp());
-		 System.out.println("Product Quantity available = "+p.getProductQuantity());
-		 System.out.println("----------------------------------------------");
+		String s = String.format("\n|%-15d", p.getProductID());
+		 System.out.print(s);
+		 s = String.format("|%-15s", p.getProductName());
+		 System.out.print(s);
+		 s = String.format("|%-15s", p.getBrand());
+		 System.out.print(s);
+		 s = String.format("|%-20s", p.getCategory());
+		 System.out.print(s);
+		 s = String.format("|%-15f", p.getCostPrice());
+		 System.out.print(s);
+		 s = String.format("|%-15f", p.getMrp());
+		 System.out.print(s);
+		 s = String.format("|%-15d", p.getProductQuantity());
+		 System.out.print(s+"|");
 	 }
 
 	public void checkIfAlreadyPesent(Product p, Scanner sc)
@@ -268,6 +274,8 @@ public class ProductImplementation
 		}
 		else
 		{
+			System.out.printf("|%-15s|%-15s|%-15s|%-20s|%-15s|%-15s|%-15s|", "PRODUCT ID","PRODUCT NAME","PRODUCT BRAND","PRODUCT CATEGORY","COST PRICE","MRP","QUANTITY");
+			System.out.printf("\n|%-15s|%-15s|%-15s|%-20s|%-15s|%-15s|%-15s|", " "," "," "," "," "," "," ");
 			Node temp = ll.getHead();
 			while(temp!=null)  //traverse till the end
 			{
