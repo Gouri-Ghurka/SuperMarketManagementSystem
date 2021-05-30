@@ -1,6 +1,5 @@
 package billing_package;
 import product_package.ProductImplementation;
-import stock_package.Stock;
 import linkedlist_package.LinkedList;
 import linkedlist_package.Node;
 import java.sql.Connection;
@@ -11,7 +10,6 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Scanner;
 
-import dealer_package.DealerImplementation;
 
 public class Billing 
 {
@@ -30,7 +28,7 @@ public class Billing
 	private String phoneno;
 	private String customername;
 
-	Scanner sc=new Scanner(System.in);
+	Scanner sc = new Scanner(System.in);
 	public LinkedList cll=new LinkedList();
 	public LinkedList pll=new LinkedList();
 
@@ -70,15 +68,17 @@ public class Billing
 		String phone="";
 		String temp="";
 		System.out.println("Enter Customer's Phone number"); 
+		//sc.nextLine();
 		do 
 		{
-			bool=sc.hasNext("[6789]{1}[0-9]{9}"); 
-			if(bool) 
-			{ 
-				phone=sc.next(); 
-			} 
-			else 
+			bool=sc.hasNext("[6789]{1}[0-9]{9}");
+			if(bool)
 			{
+				phone = sc.next();
+			}
+			else
+			{
+				bool = false;
 				temp=sc.next();
 				System.out.println("Please enter valid phone number"); 
 			}
@@ -207,7 +207,7 @@ public class Billing
 					obj.setQty_purchased(sc.nextInt());
 					if(obj.getQty_purchased()<=0||obj.getQty_purchased()>avaiQty)
 					{
-						System.out.println("Please enter qyantity between 1 and "+avaiQty);
+						System.out.println("Please enter quantity between 1 and "+avaiQty);
 						bool=false;
 					}
 				}
@@ -355,14 +355,14 @@ public class Billing
 		boolean bool=true;
 		System.out.println("**New Customer.Accept details.**");
 		System.out.println("Enter Customer Name:");
-		sc.nextLine();	
+		sc.nextLine();
 		  do 
 		  { 
 			  	
 			  customername=sc.nextLine();
 			  if(customername.isBlank()) 
 			  { 
-				  System.out.println("please enter valid customer name");  
+				  System.out.println("Please enter valid customer name");  
 				  bool=false;
 			  } 
 			  else
@@ -371,61 +371,10 @@ public class Billing
 			  }
 		  }while(!bool);
 		  
-		  //sc.nextLine();
-			/*
-			 * System.out.println("Enter Customer Name Again:"); do {
-			 * 
-			 * customername=sc.nextLine(); if(customername.isBlank()) {
-			 * System.out.println("please enter valid customer name"); bool=false; } else {
-			 * bool=true; } }while(!bool);
-			 */
-		
 		Customer cobj=new Customer();
 		cobj.setC_name(customername);
 		cobj.setC_phone_no(phno);
 		cobj.setTot_points(0);//new customer points are always zero
 		cll.insertLast(cobj);	  
-	}
-
-
-	public static void main(String[] args)
-	{
-		/*
-		 * Scanner sc=new Scanner(System.in);
-		 * 
-		 * 
-		 * //System.out.println("1.Add a new product"); int ch=sc.nextInt();
-		 * ProductImplementation product=new ProductImplementation();
-		 * DealerImplementation dealer=new DealerImplementation();
-		 * product.retrieveFromDataBase(); dealer.retrieve(); //dealer.displayList();
-		 * //product.addProduct(sc);
-		 * 
-		 * 
-		 * 
-		 * Stock sobj=new Stock(); sobj.checkQuantity(product,dealer);
-		 * 
-		 * product.addToDataBase()
-		 */;
-			
-		 ProductImplementation product=new ProductImplementation();
-		 product.retrieveFromDataBase();
-			  Billing bobj1=new Billing(); 
-			  bobj1.retrieve(); 
-			  bobj1.billGeneration(product);
-			  
-			  bobj1.billGeneration(product);
-			  bobj1.loadIntoDatabase();
-			 
-			 
-			 
-			
-			   
-			 
-		 
-		
-		/*
-		 * Billing bobj2=new Billing(); bobj2.retrive(); bobj2.billGeneration();
-		 * bobj2.loadIntoDatabase();
-		 */
 	}
 }
