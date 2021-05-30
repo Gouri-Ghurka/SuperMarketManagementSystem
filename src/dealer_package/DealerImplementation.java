@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Scanner;
 import java.util.regex.Pattern;
-
 import linkedlist_package.LinkedList;
 import linkedlist_package.Node;
 
@@ -14,7 +13,6 @@ public class DealerImplementation
 {
 
 	public LinkedList ll=new LinkedList();
-	Scanner sc=new Scanner(System.in);
 	public void retrieve()//to retrieve the existing data from database
 	{
 
@@ -58,21 +56,19 @@ public class DealerImplementation
 
 	}
 
-	private Dealer acceptDealerDetails()
+	private Dealer acceptDealerDetails(Scanner sc)
 	{
 		Dealer d=new Dealer();
 		boolean check=false;
 		String temp;
 		System.out.println("Enter Dealer Name");
-		//sc.nextLine();
+		sc.nextLine();
+
 		do
 		{
-			check=false;
-
 			String name=sc.nextLine();
 			if(name.isBlank())
 			{
-				//temp=sc.nextLine();
 				System.out.println("Please Enter Appropriate Name!!!");
 				check=false;
 
@@ -85,6 +81,7 @@ public class DealerImplementation
 		}while(check==false);
 
 		System.out.println("Enter Dealer Category");
+
 		do
 		{
 			check=false;
@@ -103,6 +100,7 @@ public class DealerImplementation
 		}while(check==false);
 
 		System.out.println("Enter Product Name sold");
+
 		do
 		{
 			check=false;
@@ -118,7 +116,9 @@ public class DealerImplementation
 			}
 
 		}while(check==false);
+
 		System.out.println("Enter Dealer Company Name");
+
 		do
 		{
 			check=false;
@@ -135,11 +135,8 @@ public class DealerImplementation
 
 		}while(check==false);
 
-
-
-
-
 		System.out.println("Enter Dealer Contact Number");
+
 		do
 		{
 			check=false;
@@ -167,7 +164,9 @@ public class DealerImplementation
 			}
 
 		}while(check==false);
+
 		System.out.println("Enter Email-Address");
+
 		do
 		{
 			check=false;
@@ -195,7 +194,9 @@ public class DealerImplementation
 			}
 
 		}while(check==false);
+
 		System.out.println("Enter Dealer Address");
+
 		do
 		{
 			check=false;
@@ -207,13 +208,11 @@ public class DealerImplementation
 			}
 			else
 			{
+				d.setD_address(address);
 				check=true;
 			}
 
 		}while(check==false);
-
-
-
 
 		System.out.println("Enter Quantity of Product available with the dealer");
 
@@ -251,7 +250,9 @@ public class DealerImplementation
 				System.out.println("Please Enter Appropriate Quantity!!!");
 			}
 		}while(check==false);
+
 		System.out.println("Enter Price per piece");
+
 		do
 		{
 			check=false;//check turns true when appropriate value of price is entered
@@ -276,8 +277,8 @@ public class DealerImplementation
 
 		}while(check==false);
 
-
 		System.out.println("Enter Discount provided");
+
 		do
 		{
 			check=false;//check turns true when appropriate discount value is entered
@@ -305,16 +306,16 @@ public class DealerImplementation
 
 		return d;
 	}
-	public void addNewDealer()
+	public void addNewDealer(Scanner sc)
 	{
 		Node temp=ll.getHead();
 
 		int flag=0;//turns 1 when dealer with same contact number,product and brand already exists
 		System.out.println("Enter Details of Dealer");
-		Dealer d=this.acceptDealerDetails();
+		Dealer d=this.acceptDealerDetails(sc);
 		while(temp!=null)
 		{
-			if((d.getD_contact_no()).equals(((Dealer)(temp.getData())).getD_contact_no()))
+			if((d.getD_contact_no()).equals(((Dealer)(temp.getData())).getD_contact_no()) && (d.getD_name()).equalsIgnoreCase(((Dealer)(temp.getData())).getD_name()))
 			{
 				if((d.getD_prod_name()).equalsIgnoreCase(((Dealer)(temp.getData())).getD_prod_name()))
 				{
@@ -426,12 +427,15 @@ public class DealerImplementation
 	}
 	public void displayBest(Dealer best)
 	{
-		System.out.println("ORDER IS PLACED WITH:");
-		System.out.println("NAME:               "+best.getD_name());
-		System.out.println("ID:                 "+best.getD_id());
-		System.out.println("TOTAL PRICE:        "+(best.getD_finalPrice()/(1-(best.getD_discount()/100))));
-		System.out.println("DISCOUNT            "+(best.getD_finalPrice()/(1-(best.getD_discount()/100)))*(best.getD_discount()/100));
-		System.out.println("FINAL PRICE:        "+best.getD_finalPrice());
+		System.out.println("***********************************************************************");
+		System.out.println("ORDER IS PLACED WITH :");
+		System.out.println("***********************************************************************");
+		System.out.println("NAME                 "+best.getD_name());
+		System.out.println("ID                   "+best.getD_id());
+		System.out.println("TOTAL PRICE          "+(best.getD_finalPrice()/(1-(best.getD_discount()/100))));
+		System.out.println("DISCOUNT             "+(best.getD_finalPrice()/(1-(best.getD_discount()/100)))*(best.getD_discount()/100));
+		System.out.println("FINAL PRICE:         "+best.getD_finalPrice());
+		System.out.println("***********************************************************************");
 	}
 	public Node searchWithId(int id)
 	{
@@ -456,7 +460,7 @@ public class DealerImplementation
 		}
 		return result;
 	}
-	public void displayWithId()
+	public void displayWithId(Scanner sc)
 	{
 		boolean check=false;//check turns true when appropriate id is entered
 		int id=0;//accept id entered by user
@@ -495,13 +499,17 @@ public class DealerImplementation
 		Node temp=searchWithId(id);
 		if(temp!=null)
 		{
-			System.out.println("Name of Dealer is:                "+((Dealer)temp.getData()).getD_name());
-			System.out.println("Product Category is:              "+((Dealer)temp.getData()).getD_category());
-			System.out.println("Product Name is:                  "+((Dealer)temp.getData()).getD_prod_name());
-			System.out.println("Product Company:                  "+((Dealer)temp.getData()).getD_company());
-			System.out.println("Dealer's Contact No is:           "+((Dealer)temp.getData()).getD_contact_no());
-			System.out.println("Dealer's Email Address is:        "+((Dealer)temp.getData()).getD_email());
-			System.out.println("Dealer's Address is:              "+((Dealer)temp.getData()).getD_address());
+
+			System.out.println("************************************************************************************************************************************************************************************************************************************************");
+
+			System.out.printf("%-30s %-30s %-30s %-30s %-30s %-40s %-30s", "NAME", "PRODUCT_CATEGORY", "PRODUCT_NAME", "PRDOUCT_BRAND", "CONTACT_NUMBER", "EMAIL_ADDRESS", "ADDRESS");
+			System.out.println();
+			System.out.format("%-30s %-30s %-30s %-30s %-30s %-40s %-30s",((Dealer)temp.getData()).getD_name(),((Dealer)temp.getData()).getD_category(),
+					((Dealer)temp.getData()).getD_prod_name(),((Dealer)temp.getData()).getD_company(),((Dealer)temp.getData()).getD_contact_no(),
+					((Dealer)temp.getData()).getD_email(),((Dealer)temp.getData()).getD_address());
+			System.out.println();
+			System.out.println("************************************************************************************************************************************************************************************************************************************************");
+
 		}
 		else
 		{
@@ -519,27 +527,29 @@ public class DealerImplementation
 		}
 		else
 		{
+			System.out.println("************************************************************************************************************************************************************************************************************************************************");
+
+			System.out.printf("%-30s %-30s %-30s %-30s %-30s %-40s %-30s", "NAME", "PRODUCT_CATEGORY", "PRODUCT_NAME", "PRDOUCT_BRAND", "CONTACT_NUMBER", "EMAIL_ADDRESS", "ADDRESS");
+			System.out.println();
+			System.out.println("************************************************************************************************************************************************************************************************************************************************");
 			Node temp=ll.getHead();
 			while(temp!=null)
 			{
-				System.out.println("Id of Dealer is:              "+((Dealer)temp.getData()).getD_id());
-				System.out.println("Name of Dealer is:            "+((Dealer)temp.getData()).getD_name());
-				System.out.println("Product Category is:          "+((Dealer)temp.getData()).getD_category());
-				System.out.println("Product Name is :             "+((Dealer)temp.getData()).getD_prod_name());
-				System.out.println("Product Company:              "+((Dealer)temp.getData()).getD_company());
-				System.out.println("Dealer's Contact No is        "+((Dealer)temp.getData()).getD_contact_no());
-				System.out.println("Dealer's Email Address is:    "+((Dealer)temp.getData()).getD_email());
-				System.out.println("Dealer's Address is :         "+((Dealer)temp.getData()).getD_address());
-				System.out.println("--------------------------------------------------------------------------");
+
+				System.out.format("%-30s %-30s %-30s %-30s %-30s %-40s %-30s",((Dealer)temp.getData()).getD_name(),((Dealer)temp.getData()).getD_category(),
+						((Dealer)temp.getData()).getD_prod_name(),((Dealer)temp.getData()).getD_company(),((Dealer)temp.getData()).getD_contact_no(),
+						((Dealer)temp.getData()).getD_email(),((Dealer)temp.getData()).getD_address());
+				System.out.println();
 
 				temp=temp.getNext();
 			}
+			System.out.println("************************************************************************************************************************************************************************************************************************************************");
 		}
 	}
 
 
 
-	public void deleteWithId()
+	public void deleteWithId(Scanner sc)
 	{
 		boolean check=false;//check turns true when appropriate id is entered
 		int id=0;       //accept id no. entered by user
