@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 
 public class Billing 
@@ -67,20 +68,21 @@ public class Billing
 		Boolean bool=true;
 		String phone="";
 		String temp="";
-		System.out.println("Enter Customer's Phone number"); 
-		//sc.nextLine();
+		System.out.println("Enter Customer's Contact number"); 
 		do 
 		{
-			bool=sc.hasNext("[6789]{1}[0-9]{9}");
-			if(bool)
+			phone=sc.nextLine();
+			if(phone.isBlank())
 			{
-				phone = sc.next();
+				bool = false;
 			}
 			else
 			{
-				bool = false;
-				temp=sc.next();
-				System.out.println("Please enter valid phone number"); 
+				bool = Pattern.matches("[6789]{1}[0-9]{9}", phone); 
+			}
+			if(bool == false)
+			{
+				System.out.println("Please Enter Valid Contact Number");
 			}
 		}while(!bool);
 		
@@ -355,7 +357,7 @@ public class Billing
 		boolean bool=true;
 		System.out.println("**New Customer.Accept details.**");
 		System.out.println("Enter Customer Name:");
-		sc.nextLine();
+		//sc.nextLine();
 		  do 
 		  { 
 			  	
