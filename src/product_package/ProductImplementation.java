@@ -298,7 +298,9 @@ public class ProductImplementation
 		}
 		else
 		{
-			System.out.println("Product found. Details are: ");
+			//Headings are displayed only once since ID is unique.
+			System.out.printf("\n|%-15s|%-15s|%-15s|%-20s|%-15s|%-15s|%-15s|", "PRODUCT ID","PRODUCT NAME","PRODUCT BRAND","PRODUCT CATEGORY","COST PRICE","MRP","QUANTITY");
+			System.out.printf("\n|%-15s|%-15s|%-15s|%-20s|%-15s|%-15s|%-15s|", " "," "," "," "," "," "," ");
 			this.displayProductDetails((Product) result.getData());
 		}
 	}
@@ -331,6 +333,7 @@ public class ProductImplementation
 	public void searchProductBasedOnBrand(Scanner sc)
 	{
 		boolean result = false;
+		int flag = 0;//becomes 1 if headings are printed once
 		String brand = null;
 		if(ll.getHead()==null)
 		{
@@ -345,6 +348,12 @@ public class ProductImplementation
 			{
 				if((((Product)temp.getData()).getBrand()).equalsIgnoreCase(brand))
 				{
+					if(flag==0)
+					{
+						System.out.printf("\n|%-15s|%-15s|%-15s|%-20s|%-15s|%-15s|%-15s|", "PRODUCT ID","PRODUCT NAME","PRODUCT BRAND","PRODUCT CATEGORY","COST PRICE","MRP","QUANTITY");
+						System.out.printf("\n|%-15s|%-15s|%-15s|%-20s|%-15s|%-15s|%-15s|", " "," "," "," "," "," "," ");
+						flag = 1;
+					}
 					System.out.println("Product found. Details are: ");
 					this.displayProductDetails((Product)temp.getData());
 					result = true;//product found
