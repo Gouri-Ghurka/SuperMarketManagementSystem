@@ -271,10 +271,10 @@ public class EmployeeImplementation
 			{
 				if((((Employee)temp.getData()).getE_id())==id)
 				{
-					Employee emp = (Employee)temp.getData();
+				
 					if(flag==0)
                                         {
-                                         System.out.format("%-30d %-30s %-30s %-30s %-30f %-40s %-30s",emp.getE_id(),emp.getE_name(),emp.getE_role(),emp.getE_contact_no(),emp.getE_salary(),emp.getE_address(),emp.getE_email());
+                                         System.out.format("%-30d %-30s %-30s %-30s %-30f %-40s %-30s",Employee Id,Employee Name,Employee Role,Employee ContactNo.,Employee Salary,Employee Address,Employee Email Id);
 		                         System.out.println();
                                          flag=1;
                                          }
@@ -389,9 +389,9 @@ public class EmployeeImplementation
 				{ 
 					if(flag==0)
 					{
-						//change
-						System.out.format("%-30d %-30s %-30s %-30s %-30f %-40s %-30s",em.getE_id(),em.getE_name(),em.getE_role(),em.getE_contact_no(),em.getE_salary(),em.getE_address(),em.getE_email());
-						System.out.println();
+						System.out.format("%-30d %-30s %-30s %-30s %-30f %-40s %-30s",Employee Id,Employee Name,Employee Role,Employee ContactNo.,Employee Salary,Employee Address,Employee Email Id);
+		                                System.out.println();
+						
 						flag=1;
 					}
 					this.displayEmployeeDetails((Employee)temp.getData());
