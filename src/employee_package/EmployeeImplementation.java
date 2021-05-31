@@ -257,7 +257,7 @@ public class EmployeeImplementation
 	{
 		boolean result = false;
 		int id = 0;
-                int flag=0;
+		int flag=0;
 		if(ll.getHead()==null)
 		{
 			System.out.println("Empty list. Cannot search");
@@ -271,13 +271,13 @@ public class EmployeeImplementation
 			{
 				if((((Employee)temp.getData()).getE_id())==id)
 				{
-				
+
 					if(flag==0)
-                                        {
-                                         System.out.format("%-30d %-30s %-30s %-30s %-30f %-40s %-30s",Employee Id,Employee Name,Employee Role,Employee ContactNo.,Employee Salary,Employee Address,Employee Email Id);
-		                         System.out.println();
-                                         flag=1;
-                                         }
+					{
+						System.out.format("%-30s %-30s %-30s %-30s %-30s %-40s %-30s","Employee Id","Employee Name","Employee Role","Employee Contact No.","Employee Salary","Employee Address","Employee Email Id");
+						System.out.println();
+						flag=1;
+					}
 					this.displayEmployeeDetails((Employee)temp.getData());
 					result = true;//employee found
 				}
@@ -360,28 +360,28 @@ public class EmployeeImplementation
 	{ 
 		boolean result =false;
 		String temprole;
-                boolean bool=true;
-                int flag=0;
-                if(ll.getHead()==null) {
+		boolean bool=true;
+		int flag=0;
+		if(ll.getHead()==null) {
 			System.out.println("Empty list. Cannot search"); } 
-                else
-                { 
-                
-		       System.out.println("Enter Employee Role");
-                sc.nextLine();
-		do {
-			bool=false;
-			temprole=sc.nextLine();
-			if(temprole.isBlank())
-				System.out.println("Please Enter Appropriate Employee Role");
-			else
-			{
-				
-				bool=true;
+		else
+		{ 
 
-			}
-		}while(bool==false);
-		
+			System.out.println("Enter Employee Role");
+			sc.nextLine();
+			do {
+				bool=false;
+				temprole=sc.nextLine();
+				if(temprole.isBlank())
+					System.out.println("Please Enter Appropriate Employee Role");
+				else
+				{
+
+					bool=true;
+
+				}
+			}while(bool==false);
+
 			Node temp = ll.getHead();
 			while(temp!=null)
 			{
@@ -389,9 +389,9 @@ public class EmployeeImplementation
 				{ 
 					if(flag==0)
 					{
-						System.out.format("%-30d %-30s %-30s %-30s %-30f %-40s %-30s",Employee Id,Employee Name,Employee Role,Employee ContactNo.,Employee Salary,Employee Address,Employee Email Id);
-		                                System.out.println();
-						
+						System.out.format("%-30s %-30s %-30s %-30s %-30s %-40s %-30s","Employee Id","Employee Name","Employee Role","Employee Contact No.","Employee Salary","Employee Address","Employee Email Id");
+						System.out.println();
+
 						flag=1;
 					}
 					this.displayEmployeeDetails((Employee)temp.getData());
@@ -400,7 +400,7 @@ public class EmployeeImplementation
 				}
 				temp = temp.getNext();
 			}
-                }
+		}
 		if(result==false)
 		{
 			System.out.println("There is no employee undder this role"); 
