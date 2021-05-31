@@ -612,7 +612,7 @@ public class ProductImplementation
 		}
 	}
 	
-	public void updateCost(int id,int mrp,int cost)
+	public void updateCost(int id,double mrp,double cost)
 	{
 		Node nodeToBeUpdated = null;
 		nodeToBeUpdated = this.searchProductBasedOnID(id);
