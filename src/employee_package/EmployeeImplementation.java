@@ -365,7 +365,9 @@ public class EmployeeImplementation
 			System.out.println("Empty list. Cannot search"); } 
                 else
                 { 
+                
 		System.out.println("Enter Employee Role");
+                sc.nextLine();
 		do {
 			bool=false;
 			String temprole=sc.nextLine();
