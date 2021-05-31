@@ -91,6 +91,7 @@ public class User
 					case 1:
 						do
 						{
+							System.out.println();
 							System.out.println("FUNCTIONS:");
 							System.out.println("1. DISPLAY THE PRODUCT LIST");
 							System.out.println("2. DISPLAY THE EMPLOYEE LIST");
@@ -123,7 +124,7 @@ public class User
 							switch(functionChoice)
 							{
 							case 1: piobj.displayList();
-							System.out.println("Number of products in the market are: "+piobj.calculateLengthOfLinkedList(piobj.ll));
+							System.out.println("\n Total Number of products in the market are: "+piobj.calculateLengthOfLinkedList(piobj.ll));
 							break;
 							case 2: empobj.displayList();
 							break;
@@ -151,6 +152,7 @@ public class User
 					case 2:
 						do
 						{
+							System.out.println();
 							System.out.println("FUNCTIONS:");
 							System.out.println("1. DISPLAY PRODUCT LIST");
 							System.out.println("2. CHECK STOCK");
@@ -274,6 +276,8 @@ public class User
 					case 3:
 						do
 						{
+							System.out.println();
+							System.out.println("FUNCTIONS");
 							System.out.println("1.GENERATE A BILL");
 							System.out.println("0.EXIT");
 							System.out.println("ENTER CHOICE :");
@@ -309,7 +313,8 @@ public class User
 					case 4:
 						do
 						{
-							System.out.println("FUNCTIONS");
+							System.out.println();
+							System.out.println("FUNCTIONS:");
 							System.out.println("1. VIEW PRODUCT DETAILS BASED ON ID");
 							System.out.println("2. VIEW PRODUCT DETAILS BASED ON BRAND");
 							System.out.println("0. EXIT");
