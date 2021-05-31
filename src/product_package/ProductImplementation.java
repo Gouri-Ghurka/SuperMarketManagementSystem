@@ -370,6 +370,7 @@ public class ProductImplementation
 
 	}
 
+
 	public void addToDataBase()
 	{
 
