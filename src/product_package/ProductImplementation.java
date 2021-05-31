@@ -344,6 +344,7 @@ public class ProductImplementation
 			System.out.println("Enter the product brand that has to be searched");
 			brand = sc.next();
 			Node temp = ll.getHead();
+			
 			while(temp!=null)  //traverse till the end
 			{
 				if((((Product)temp.getData()).getBrand()).equalsIgnoreCase(brand))
@@ -354,16 +355,16 @@ public class ProductImplementation
 						System.out.printf("\n|%-15s|%-15s|%-15s|%-20s|%-15s|%-15s|%-15s|", " "," "," "," "," "," "," ");
 						flag = 1;
 					}
-					System.out.println("Product found. Details are: ");
 					this.displayProductDetails((Product)temp.getData());
 					result = true;//product found
+					
 				}
 				temp = temp.getNext();
 			}
 		}
 		if(result==false)
 		{
-			System.out.println("The product could not be found");
+			System.out.println("\nThe product could not be found");
 		}
 
 	}
