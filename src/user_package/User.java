@@ -133,7 +133,7 @@ public class User
 							break;
 							case 5: piobj.displayProductsAboutToFinish();
 							break;
-							case 6: empobj.addEmployee();
+							case 6: empobj.addEmployee(sc);
 							break;
 							case 7: empobj.deleteEmployee(sc);
 							break;
