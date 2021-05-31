@@ -28,8 +28,13 @@ public class Stock
 				{
 					pdtBrand=((Product)temp.getData()).getBrand();
 					pdtName=((Product)temp.getData()).getProductName();
+					System.out.println();
+					System.out.printf("|%-15s|%-15s|%-15s|%-20s|%-15s|%-15s|%-15s|", "PRODUCT ID","PRODUCT NAME","PRODUCT BRAND","PRODUCT CATEGORY","COST PRICE","MRP","QUANTITY");
+					System.out.printf("\n|%-15s|%-15s|%-15s|%-20s|%-15s|%-15s|%-15s|", " "," "," "," "," "," "," ");
 					piobj.displayProductDetails((Product)temp.getData());
 					
+					System.out.println();
+					System.out.println();
 					System.out.println("WOULD LIKE TO ORDER THIS PRODUCT? ENTER Y FOR YES N FOR NO");
 					do
 					{
