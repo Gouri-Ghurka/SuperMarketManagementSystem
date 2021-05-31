@@ -257,6 +257,7 @@ public class EmployeeImplementation
 	{
 		boolean result = false;
 		int id = 0;
+                int flag=0;
 		if(ll.getHead()==null)
 		{
 			System.out.println("Empty list. Cannot search");
@@ -270,7 +271,12 @@ public class EmployeeImplementation
 			{
 				if((((Employee)temp.getData()).getE_id())==id)
 				{
-					System.out.println("Employee found. Details are: ");
+					if(flag==0)
+                                        {
+                                         System.out.format("%-30d %-30s %-30s %-30s %-30f %-40s %-30s",em.getE_id(),em.getE_name(),em.getE_role(),em.getE_contact_no(),em.getE_salary(),em.getE_address(),em.getE_email());
+		                         System.out.println();
+                                         flag=1;
+                                         }
 					this.displayEmployeeDetails((Employee)temp.getData());
 					result = true;//employee found
 				}
@@ -354,6 +360,7 @@ public class EmployeeImplementation
 		boolean result =false;
 		String temprole;
                 boolean bool=true;
+                int flag=0;
                 if(ll.getHead()==null) {
 			System.out.println("Empty list. Cannot search"); } 
                 else
@@ -377,7 +384,14 @@ public class EmployeeImplementation
 			{
 				if((((Employee)temp.getData()).getE_role().equals(temprole)))
 				{ 
+                                if(flag==0)
+                                        {
+                                         System.out.format("%-30d %-30s %-30s %-30s %-30f %-40s %-30s",em.getE_id(),em.getE_name(),em.getE_role(),em.getE_contact_no(),em.getE_salary(),em.getE_address(),em.getE_email());
+		                         System.out.println();
+                                         flag=1;
+                                         }
 					this.displayEmployeeDetails((Employee)temp.getData());
+
 					result = true;//employee found
 				}
 				temp = temp.getNext();
