@@ -595,6 +595,7 @@ public class ProductImplementation
 	
 	public void displayProductsAboutToFinish()
 	{
+		int flag = 0;//becomes 1 if headings are printed once
 		if(ll.getHead()==null)
 		{
 			System.out.println("Empty list");
@@ -606,6 +607,12 @@ public class ProductImplementation
 			{
 				if(((Product)temp.getData()).getProductQuantity()<=15)
 				{
+					if(flag==0)
+					{
+						System.out.printf("\n|%-15s|%-15s|%-15s|%-20s|%-15s|%-15s|%-15s|", "PRODUCT ID","PRODUCT NAME","PRODUCT BRAND","PRODUCT CATEGORY","COST PRICE","MRP","QUANTITY");
+						System.out.printf("\n|%-15s|%-15s|%-15s|%-20s|%-15s|%-15s|%-15s|", " "," "," "," "," "," "," ");
+						flag = 1;
+					}
 					this.displayProductDetails((Product)temp.getData());
 				}
 				temp = temp.getNext();
