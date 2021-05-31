@@ -353,11 +353,25 @@ public class EmployeeImplementation
 	{ 
 		boolean result =false;
 		String temprole;
-		if(ll.getHead()==null) {
+                boolean bool=true;
+                if(ll.getHead()==null) {
 			System.out.println("Empty list. Cannot search"); } 
-		else {
-			System.out.println("Enter the role whose employee has to be searched");
-			temprole= sc.nextLine(); 
+                else
+                { 
+		System.out.println("Enter Employee Role");
+		do {
+			bool=false;
+			String temprole=sc.nextLine();
+			if(temprole.isBlank())
+				System.out.println("Please Enter Appropriate Employee Role");
+			else
+			{
+				emp.setE_role(temprole);
+				bool=true;
+
+			}
+		}while(bool==false);
+		
 			Node temp = ll.getHead();
 			while(temp!=null)
 			{
