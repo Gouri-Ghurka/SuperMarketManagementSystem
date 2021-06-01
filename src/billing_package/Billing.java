@@ -267,6 +267,7 @@ public class Billing
 		}
 		else
 		{
+			discount = 0.0;
 			total=tot_price;
 		}
 		updatePoints();
@@ -325,6 +326,7 @@ public class Billing
 		System.out.format("%15s %5s %6s %8.2f\n","GRAND TOTAL"," "," ",grand_total);
 		System.out.println("-----------------------------------------------");
 		System.out.format("%30s","*THANK YOU.VISIT AGAIN*\n");
+		pll.setHead(null);
 	}
 
 	public void loadIntoDatabase()
